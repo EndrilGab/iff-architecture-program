@@ -11,21 +11,4 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
     password TEXT
 )`);
 
-// Função para salvar um usuário no banco de dados
-export function saveUserToDatabase(name: string, email: string, password: string): Promise<number> {
-  return new Promise((resolve, reject) => {
-    console.log('saveUserToDatabase');
-    console.log(name, email, password);
-
-    // Insere o usuário na tabela (removido parêntese extra no VALUES)
-    db.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, password], function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        // Retorna o ID do usuário inserido
-        console.log(this.lastID);
-        resolve(this.lastID); // Acessa o ID do último registro inserido
-      }
-    });
-  });
-}
+export default db;
